@@ -82,12 +82,26 @@ if data.get("current_weather"):
     else:
         bg_image = "https://i.imgur.com/pf62vOX.jpg"  # cold
 
+# ---- BACKGROUND STYLE ----
+bg_image = None
+if data.get("current_weather"):
+    temp = data["current_weather"]["temperature"]
+    if temp > 30:
+        bg_image = "https://images.unsplash.com/photo-1501973801540-537f08ccae7b"  # hot sunny
+    elif temp > 20:
+        bg_image = "https://images.unsplash.com/photo-1502082553048-f009c37129b9"  # warm clear sky
+    elif temp > 10:
+        bg_image = "https://images.unsplash.com/photo-1504384308090-c894fdcc538d"  # cool breeze
+    else:
+        bg_image = "https://images.unsplash.com/photo-1486427944299-d1955d23e34d"  # cold winter
+
 if bg_image:
     st.markdown(
         f"""
         <style>
         [data-testid="stAppViewContainer"] {{
-            background: url('{bg_image}') no-repeat center center fixed;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                        url('{bg_image}') no-repeat center center fixed;
             background-size: cover;
         }}
         </style>
